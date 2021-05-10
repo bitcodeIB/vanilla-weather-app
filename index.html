@@ -13,6 +13,13 @@
       crossorigin="anonymous"
     />
 
+    <!-- Google fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+
     <!-- custom style -->
     <link rel="stylesheet" href="src/style.css" />
 
@@ -21,11 +28,25 @@
       src="https://kit.fontawesome.com/fd4d09d67b.js"
       crossorigin="anonymous"
     ></script>
+
+    <!-- Axios -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
   </head>
   <body>
     <div class="container">
       <div class="app-wrapper">
         <div class="weather-app">
+            <form id="search-form" class="mb-5">
+                <div class="row">
+                    <div class="col-9">
+                <input type="search" name="" id="" placeholder="Enter a city name..." class="form-control">
+                </div>
+                <div class="col-3">
+                <input type="submit" value="Search" class='btn btn-primary'>
+                </div>
+                </div>
+            </form>
           <div class="row">
             <div class="col-4">
               <ul>
