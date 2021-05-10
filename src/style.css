@@ -22,11 +22,47 @@ li {
 
 }
 
+a {
+    text-decoration: none;
+    color: #70757A;
+    cursor: pointer;
+}
+a:hover {
+   color:#202124;
+}
+
+a:active {
+    color:#202124;
+}
+
+
+
+.app-wrapper {
+    max-width: 652px;
+    margin: 20px auto;
+
+}
 
 .weather-app {
-    max-width: 600px;
-    margin: 20px auto;
     padding: 20px;
     border: 1px solid #dadde1;
     border-radius: 7px;
 }
+
+.main-temperature {
+    color: #202124;
+    font-size: 48px;
+    line-height: 60px;
+}
+
+.units {
+    position: relative;
+    top: -24px;
+    padding-left: 6px;
+}
+
+.add-info {
+    font-size: 12px;
+    line-height: 16px;
+}
+
