@@ -61,15 +61,6 @@ function search(event) {
   sendApiRequest(cityInput.value, onCityInformationUpdated);
 }
 
-// function getLocalizationAndSearch(event) {
-//   event.preventDefault();
-//   navigator.geolocation.getCurrentPosition(onPositionObtained);
-// }
-
-// function onPositionObtained(position) {
-//   sendApiRequestByCoords(position.coords, onCityInformationUpdated);
-// }
-
 // Sends an API request, asking for weather in `cityName`.
 // After the request completes, it will call function `userCallback`
 // with the object containing the weather information.
@@ -83,18 +74,6 @@ function sendApiRequest(cityName, userCallback) {
     .then(userCallback);
 }
 
-// After the request completes, it will call function `userCallback`
-// with the object containing the weather information.
-// function sendApiRequestByCoords(coords, userCallback) {
-//   const apiKey = "89a9c36cd107591e242e50cb3a76a2e4";
-//   const url = `https://api.openweathermap.org/data/2.5/weather?appid=${apiKey}&units=metric&lat=${coords.latitude}&lon=${coords.longitude}`;
-
-//   axios
-//     .get(url)
-//     .then((response) => response.data)
-//     .then(userCallback);
-// }
-
 // All the information about selected city.
 let cityInformation = null;
 
@@ -107,29 +86,25 @@ function onCityInformationUpdated(data) {
   displayDescription(data);
   displayWind(data);
   displayHumidity(data);
-  
-
-
-  // coś jeszcze?
-}
+}  
 
 function convertToFahrenheit(event) {
   event.preventDefault();
 
   temperatureElement.innerHTML =
-    Math.round((cityInformation.main.temp * 9) / 5 + 32) + " °F";
+    Math.round((cityInformation.main.temp * 9) / 5 + 32);
 }
 
 function convertToCelsius(event) {
   event.preventDefault();
 
-  temperatureElement.innerHTML = Math.round(cityInformation.main.temp) + " °C";
+  temperatureElement.innerHTML = Math.round(cityInformation.main.temp);
 }
 
 function displayWeather(data) {
   let temperature = Math.round(data.main.temp);
 
-  temperatureElement.innerText = `${temperature}` + " °C";
+  temperatureElement.innerText = `${temperature}`;
 }
 
 function displayCity(data) {
@@ -149,22 +124,17 @@ function displayHumidity(data) {
     humidityElement.innerText = data.main.humidity;
 }
 
-// function displayPrecipitation(data) {
-//     precipitationElement.innerText = data.
-// }
-
 
 
 function displayTime(data) {
   const shiftFromUTCInSeconds = data.timezone; // How much time off we are from UTC.
 
   // TODO: figure out how to convert the time to UTC and apply the shif.
-  // TODO: wind speed, precipitation, weather description, and weather icon are mandatory
-// TODO: poprawić style
+ 
   dateElement.innerText = formatDate(new Date());
 }
 
-// navigator.geolocation.getCurrentPosition(onPositionObtained);
+sendApiRequest('Warsaw', onCityInformationUpdated);
 
 
 
