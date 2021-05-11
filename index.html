@@ -31,55 +31,73 @@
 
     <!-- Axios -->
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-
   </head>
   <body>
     <div class="container">
       <div class="app-wrapper">
         <div class="weather-app">
-            <form id="search-form" class="mb-5">
-                <div class="row">
-                    <div class="col-9">
-                <input type="search" name="" id="" placeholder="Enter a city name..." class="form-control">
-                </div>
-                <div class="col-3">
-                <input type="submit" value="Search" class='btn btn-primary'>
-                </div>
-                </div>
-            </form>
+          <form id="search-form" class="mb-5">
+            <div class="row">
+              <div class="col-10">
+                
+                <input
+                  type="search"
+                  name=""
+                  id="input-city"
+                  placeholder="Enter a city name..."
+                  class="form-control"
+                />
+              </div>
+              <div class="col-2">
+                <input
+                  type="submit"
+                  value="Search"
+                  class="btn btn-primary"
+                  id="search-button"
+                />
+              </div>
+            </div>
+          </form>
+          <div class="row city-block">
+            <h1 class="city" id="city">City</h1>
+            <ul>
+              <li class="current-day" id="current-day">Monday, 00:34</li>
+              <li class="description" id="description">clear sky</li>
+            </ul>
+          </div>
           <div class="row">
             <div class="col-4">
-              <ul>
-                <i class="fas fa-cloud-sun main-icon"></i>
-                <span class="main-temperature">22</span>
-                <span class="units"><a href="#">°C</a> | <a href="#">°F</a></span>
+              <div class="temperature">
+              <span class="main-temperature" id="temperature">22</span
+              ><span class="units"
+                ><a href="#" id="celsius">°C</a> |
+                <a href="#" id="fahrenheit">°F</a></span>
+                </div>
+            </div>
+            <div class="col-4">
+              <img src="" alt="" id="main-icon" class="main-icon"/>
+            </div>
+            <div class="col-4">
+              <ul class="add-info-block">
+                <li class="add-info">
+                  Humidity: <span id="humidity"></span> %
+                </li>
+                <li class="add-info">Wind: <span id="wind"></span> km/h</li>
               </ul>
             </div>
-            <div class="col-3">
-              <ul>
-                <li class="add-info">Precipitation: 0%</li>
-                <li class="add-info">Humidity</li>
-                <li class="add-info">Wind</li>
-              </ul>
-            </div>
-            
-            
-            <div class="col-5">
-              <h1>City</h1>
-              <ul>
-                <li>Monday, 00:34</li>
-                <li>clear sky</li>
-              </ul>
-            </div>
+
+            <!-- <div class="col-5">
+              
+            </div> -->
           </div>
         </div>
         <small>
+          This project was coded by Izabela Białecka and is
           <a
             href="https://github.com/bitcodeIB/vanilla-weather-app"
             target="_blank"
-            >Link do repozytorium github</a
+            >open-sourced on GitHub</a
           >
-          Izabela Białecka
         </small>
       </div>
     </div>

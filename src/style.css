@@ -5,7 +5,7 @@ body {
 
 h1 {
     color: #202124;
-    font-size: 22px;
+    font-size: 24px;
     font-weight: 400;
     margin-bottom: 0;
 
@@ -19,7 +19,6 @@ ul {
 li {
     list-style: none;
     font-size: 16px;
-
 }
 
 li:first-letter {
@@ -28,21 +27,23 @@ li:first-letter {
 
 a {
     text-decoration: none;
-    color: #70757A;
+    color: #0d6efd;
     cursor: pointer;
 }
 a:hover {
-   color:#202124;
+   font-weight: bold;
 }
 
 a:active {
-    color:#202124;
+    font-weight: bold;
 }
 
-
+small {
+    font-size: .8em;
+}
 
 .app-wrapper {
-    max-width: 652px;
+    max-width: 600px;
     margin: 20px auto;
 
 }
@@ -53,6 +54,25 @@ a:active {
     border-radius: 7px;
 }
 
+
+.city-block {
+    margin-bottom: 40px;
+}
+
+.city, .current-day, .description {
+    text-align: center;
+}
+
+.main-icon {
+    width: 100px;
+    height: 100px;
+    display: block;
+    margin: 0 auto;
+}
+.temperature {
+    padding-top: 14px;
+    padding-left: 50px;
+}
 .main-temperature {
     color: #202124;
     font-size: 48px;
@@ -61,12 +81,19 @@ a:active {
 
 .units {
     position: relative;
-    top: -24px;
-    padding-left: 6px;
+    top: -22px;
+    margin-left: 10px;
 }
+
+.add-info-block {
+    padding-top: 20px;
+}
+
 
 .add-info {
     font-size: 12px;
     line-height: 16px;
+    text-align: center;
+    
 }
 
