@@ -27,16 +27,10 @@ li:first-letter {
 
 a {
     text-decoration: none;
-    color: #0d6efd;
-    cursor: pointer;
-}
-a:hover {
-   font-weight: bold;
+    /* color: #0d6efd; */
+    /* cursor: pointer; */
 }
 
-a:active {
-    font-weight: bold;
-}
 
 small {
     font-size: .8em;
@@ -114,4 +108,14 @@ small {
 .temp-max {
     color: #202124;
     font-weight: bold;
+}
+
+.active {
+    color: #202124;
+    font-weight: bold;
+    cursor: default;
+}
+
+.active:hover {
+    color: #202124;
 }
