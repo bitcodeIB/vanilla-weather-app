@@ -16,6 +16,8 @@ const humidityElement = document.getElementById("humidity");
 
 const windElement = document.getElementById("wind");
 
+const forecastElement = document.getElementById("forecast");
+
 const searchButton = document.getElementById("search-button");
 searchButton.addEventListener("click", search);
 
@@ -82,6 +84,7 @@ function onCityInformationUpdated(data) {
   displayWind(data);
   displayHumidity(data);
   displayIcon(data);
+  displayForecast();
 }
 
 function convertToFahrenheit(event) {
@@ -118,7 +121,7 @@ function displayWind(data) {
 }
 
 function displayIcon(data) {
-  icon = data.weather[0].icon
+  icon = data.weather[0].icon;
   mainIconElement.setAttribute(
     "src",
     `http://openweathermap.org/img/wn/${icon}@2x.png`
@@ -140,5 +143,32 @@ function displayTime(data) {
 
   dateElement.innerText = formatDate(new Date());
 }
+
+function displayForecast() {
+  let forecastHTML = `<div class="row">`;
+  let days = ['Mon', 'Tues', 'Wed', 'Thurs', 'Fri'];
+  days.forEach(function(day) {
+      forecastHTML =
+        forecastHTML +
+        `<div class="col-2">
+                  <div class="weather-forecast-date">${day}</div>
+                  <img
+                    src="https://ssl.gstatic.com/onebox/weather/48/partly_cloudy.png"
+                    alt=""
+                  />
+                  <div class="weather-forecast-temperatures">
+                    <span class="temp-max">18°</span>
+                    <span class="temp-min">12°</span>
+                  </div>            
+              </div>`;
+  });
+  forecastHTML = forecastHTML + `</div>`;
+  forecastElement.innerHTML = forecastHTML;
+}
+  // days.forEach(function (day) {
+
+
+
+
 
 sendApiRequest("Warsaw", onCityInformationUpdated);
