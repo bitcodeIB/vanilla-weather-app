@@ -71,6 +71,18 @@ function sendApiRequest(cityName, userCallback) {
     .then(userCallback);
 }
 
+
+function getForecast(coordinates) {
+  
+  const apiKey = "89a9c36cd107591e242e50cb3a76a2e4";
+  const apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(displayForecast);
+  
+  // testowy link 
+  // https://api.openweathermap.org/data/2.5/onecall?lat=47.6062&lon=-122.3321&appid=89a9c36cd107591e242e50cb3a76a2e4&units=metric
+}
+
+
 // All the information about selected city.
 let cityInformation = null;
 
@@ -85,7 +97,8 @@ function onCityInformationUpdated(data) {
   displayHumidity(data);
   displayIcon(data);
   getForecast(data.coord);
-  console.log(data);// displayForecast();
+  
+  
 }
 
 function convertToFahrenheit(event) {
@@ -131,10 +144,6 @@ function displayIcon(data) {
     "src",
     `http://openweathermap.org/img/wn/${icon}@2x.png`
   );
-  // mainIconElement.setAttribute(
-  //   "src",
-  //   "http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png"
-  // );
 }
 
 function displayHumidity(data) {
@@ -149,16 +158,11 @@ function displayTime(data) {
   dateElement.innerText = formatDate(new Date());
 }
 
-function getForecast(coordinates) {
-  console.log(coordinates);
-  const apiKey = "89a9c36cd107591e242e50cb3a76a2e4";
-  const apiUrl =
-    `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
-  axios.get(apiUrl).then(displayForecast);
-}
 
 
-function displayForecast() {
+
+function displayForecast(response) {
+  console.log(response);
   let forecastHTML = `<div class="row">`;
   let days = ['Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat'];
   days.forEach(function(day) {
