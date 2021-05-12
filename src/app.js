@@ -21,6 +21,9 @@ const forecastElement = document.getElementById("forecast");
 const searchButton = document.getElementById("search-button");
 searchButton.addEventListener("click", search);
 
+const localizationButton = document.getElementById("localization-button");
+localizationButton.addEventListener("click", getLocalizationAndSearch);
+
 const celsiusLink = document.getElementById("celsius");
 celsiusLink.addEventListener("click", convertToCelsius);
 
@@ -58,6 +61,15 @@ function search(event) {
   sendApiRequest(cityInput.value, onCityInformationUpdated);
 }
 
+function getLocalizationAndSearch(event) {
+  event.preventDefault();
+  navigator.geolocation.getCurrentPosition(onPositionObtained);
+}
+
+function onPositionObtained(position) {
+  sendApiRequestByCoords(position.coords, onCityInformationUpdated);
+}
+
 // Sends an API request, asking for weather in `cityName`.
 // After the request completes, it will call function `userCallback`
 // with the object containing the weather information.
@@ -70,6 +82,18 @@ function sendApiRequest(cityName, userCallback) {
     .then((response) => response.data)
     .then(userCallback);
 }
+
+function sendApiRequestByCoords(coords, userCallback) {
+  const apiKey = "89a9c36cd107591e242e50cb3a76a2e4";
+  const url = `https://api.openweathermap.org/data/2.5/weather?appid=${apiKey}&units=metric&lat=${coords.latitude}&lon=${coords.longitude}`;
+
+  axios
+    .get(url)
+    .then((response) => response.data)
+    .then(userCallback);
+}
+
+
 
 
 function getForecast(coordinates) {

@@ -119,3 +119,7 @@ small {
 .active:hover {
     color: #202124;
 }
+
+.localization-button {
+    width: 80px;
+}
