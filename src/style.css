@@ -98,3 +98,20 @@ small {
     
 }
 
+.weather-forecast {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.weather-forecast-date {
+    font-size: 16px;
+}
+
+.weather-forecast-temperatures {
+    font-size: 13px;
+}
+
+.temp-max {
+    color: #202124;
+    font-weight: bold;
+}
