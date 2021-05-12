@@ -25,12 +25,7 @@ celsiusLink.addEventListener("click", convertToCelsius);
 const fahrenheitLink = document.getElementById("fahrenheit");
 fahrenheitLink.addEventListener("click", convertToFahrenheit);
 
-mainIconElement.setAttribute("src", "http://openweathermap.org/img/wn/10d@2x.png") 
-
-
-
 function formatDate(date) {
-
   let hours = date.getHours();
   if (hours < 10) {
     hours = `0${hours}`;
@@ -86,13 +81,15 @@ function onCityInformationUpdated(data) {
   displayDescription(data);
   displayWind(data);
   displayHumidity(data);
-}  
+  displayIcon(data);
+}
 
 function convertToFahrenheit(event) {
   event.preventDefault();
 
-  temperatureElement.innerHTML =
-    Math.round((cityInformation.main.temp * 9) / 5 + 32);
+  temperatureElement.innerHTML = Math.round(
+    (cityInformation.main.temp * 9) / 5 + 32
+  );
 }
 
 function convertToCelsius(event) {
@@ -113,28 +110,35 @@ function displayCity(data) {
 }
 
 function displayDescription(data) {
-    descriptionElement.innerText = data.weather[0].description;
+  descriptionElement.innerText = data.weather[0].description;
 }
 
 function displayWind(data) {
-    windElement.innerText = data.wind.speed;
+  windElement.innerText = data.wind.speed;
+}
+
+function displayIcon(data) {
+  icon = data.weather[0].icon
+  mainIconElement.setAttribute(
+    "src",
+    `http://openweathermap.org/img/wn/${icon}@2x.png`
+  );
+  // mainIconElement.setAttribute(
+  //   "src",
+  //   "http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png"
+  // );
 }
 
 function displayHumidity(data) {
-    humidityElement.innerText = data.main.humidity;
+  humidityElement.innerText = data.main.humidity;
 }
-
-
 
 function displayTime(data) {
   const shiftFromUTCInSeconds = data.timezone; // How much time off we are from UTC.
 
   // TODO: figure out how to convert the time to UTC and apply the shif.
- 
+
   dateElement.innerText = formatDate(new Date());
 }
 
-sendApiRequest('Warsaw', onCityInformationUpdated);
-
-
-
+sendApiRequest("Warsaw", onCityInformationUpdated);
