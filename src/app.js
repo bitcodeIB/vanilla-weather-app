@@ -70,6 +70,10 @@ function onPositionObtained(position) {
   sendApiRequestByCoords(position.coords, onCityInformationUpdated);
 }
 
+function getDataFromResponse (response) {
+  return response.data;
+}
+
 // Sends an API request, asking for weather in `cityName`.
 // After the request completes, it will call function `userCallback`
 // with the object containing the weather information.
@@ -79,7 +83,7 @@ function sendApiRequest(cityName, userCallback) {
 
   axios
     .get(url)
-    .then((response) => response.data)
+    .then(getDataFromResponse)
     .then(userCallback);
 }
 
@@ -89,29 +93,25 @@ function sendApiRequestByCoords(coords, userCallback) {
 
   axios
     .get(url)
-    .then((response) => response.data)
+    .then(getDataFromResponse)
     .then(userCallback);
 }
 
-
-
-
-function getForecast(coordinates) {
-  
+function getForecast(coordinates, userCallback) {
   const apiKey = "89a9c36cd107591e242e50cb3a76a2e4";
   const apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
-  axios.get(apiUrl).then(displayForecast);
   
-  // testowy link 
+  axios.get(apiUrl).then(getDataFromResponse).then(userCallback);
+  
+  // testowy link
   // https://api.openweathermap.org/data/2.5/onecall?lat=47.6062&lon=-122.3321&appid=89a9c36cd107591e242e50cb3a76a2e4&units=metric
 }
-
 
 // All the information about selected city.
 let cityInformation = null;
 
 function onCityInformationUpdated(data) {
-  cityInformation = data;
+  // cityInformation = data;
 
   displayCity(data);
   displayWeather(data);
@@ -120,9 +120,8 @@ function onCityInformationUpdated(data) {
   displayWind(data);
   displayHumidity(data);
   displayIcon(data);
-  getForecast(data.coord);
-  
-  
+  // Send another request to obtain the forecast
+  getForecast(data.coord, displayForecast);
 }
 
 function convertToFahrenheit(event) {
@@ -182,20 +181,19 @@ function displayTime(data) {
   dateElement.innerText = formatDate(new Date());
 }
 
+function displayForecast(data) {
 
 
-
-function displayForecast(response) {
-  console.log(response);
+  console.log(data);
   let forecastHTML = `<div class="row">`;
-  let days = ['Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat'];
-  days.forEach(function(day) {
-      forecastHTML =
-        forecastHTML +
-        `<div class="col-2">
+  let days = ["Mon", "Tues", "Wed", "Thurs", "Fri", "Sat"];
+  days.forEach(function (day) {
+    forecastHTML =
+      forecastHTML +
+      `<div class="col-2">
                   <div class="weather-forecast-date">${day}</div>
                   <img
-                    src="https://ssl.gstatic.com/onebox/weather/48/partly_cloudy.png"
+                    src=""
                     alt=""
                   />
                   <div class="weather-forecast-temperatures">
@@ -207,10 +205,5 @@ function displayForecast(response) {
   forecastHTML = forecastHTML + `</div>`;
   forecastElement.innerHTML = forecastHTML;
 }
-  // days.forEach(function (day) {
-
-
-
-
 
 sendApiRequest("Warsaw", onCityInformationUpdated);
