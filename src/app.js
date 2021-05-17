@@ -24,11 +24,11 @@ searchButton.addEventListener("click", search);
 const localizationButton = document.getElementById("localization-button");
 localizationButton.addEventListener("click", getLocalizationAndSearch);
 
-const celsiusLink = document.getElementById("celsius");
-celsiusLink.addEventListener("click", convertToCelsius);
+// const celsiusLink = document.getElementById("celsius");
+// celsiusLink.addEventListener("click", convertToCelsius);
 
-const fahrenheitLink = document.getElementById("fahrenheit");
-fahrenheitLink.addEventListener("click", convertToFahrenheit);
+// const fahrenheitLink = document.getElementById("fahrenheit");
+// fahrenheitLink.addEventListener("click", convertToFahrenheit);
 
 function formatDate(date) {
   let hours = date.getHours();
@@ -125,23 +125,23 @@ function onCityInformationUpdated(data) {
   getForecast(data.coord, displayForecast);
 }
 
-function convertToFahrenheit(event) {
-  event.preventDefault();
-  celsiusLink.classList.remove("active");
-  fahrenheitLink.classList.add("active");
+// function convertToFahrenheit(event) {
+//   event.preventDefault();
+//   celsiusLink.classList.remove("active");
+//   fahrenheitLink.classList.add("active");
 
-  temperatureElement.innerHTML = Math.round(
-    (cityInformation.main.temp * 9) / 5 + 32
-  );
-}
+//   temperatureElement.innerHTML = Math.round(
+//     (cityInformation.main.temp * 9) / 5 + 32
+//   );
+// }
 
-function convertToCelsius(event) {
-  event.preventDefault();
-  celsiusLink.classList.add("active");
-  fahrenheitLink.classList.remove("active");
+// function convertToCelsius(event) {
+//   event.preventDefault();
+//   celsiusLink.classList.add("active");
+//   fahrenheitLink.classList.remove("active");
 
-  temperatureElement.innerHTML = Math.round(cityInformation.main.temp);
-}
+//   temperatureElement.innerHTML = Math.round(cityInformation.main.temp);
+// }
 
 function displayWeather(data) {
   let temperature = Math.round(data.main.temp);
@@ -192,9 +192,7 @@ function displayForecast(data) {
   forecast.forEach(function (forecastDay, index) {
     // let i = 0
     if (index < 6) {
-      forecastHTML =
-        forecastHTML +
-        `<div class="col-2">
+      forecastHTML += `<div class="col-2">
                   <div class="weather-forecast-date">${formatDay(
                     forecastDay.dt
                   )}</div>
@@ -209,7 +207,7 @@ function displayForecast(data) {
                     <span class="temp-max">${Math.round(
                       forecastDay.temp.max
                     )}°</span>
-                    <span class="temp-min">${Math.round(
+                    <span class="temp-min"> | ${Math.round(
                       forecastDay.temp.min
                     )}°</span>
                   </div>            
