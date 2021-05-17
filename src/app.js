@@ -30,8 +30,10 @@ localizationButton.addEventListener("click", getLocalizationAndSearch);
 // const fahrenheitLink = document.getElementById("fahrenheit");
 // fahrenheitLink.addEventListener("click", convertToFahrenheit);
 
-function formatDate(date) {
-  let hours = date.getHours();
+function formatDate(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let shiftFromUTCINHours = date.getTimezoneOffset() / 60; // How much time off we are from UTC
+  let hours = date.getHours() + shiftFromUTCINHours;
   if (hours < 10) {
     hours = `0${hours}`;
   }
@@ -39,8 +41,8 @@ function formatDate(date) {
   if (minutes < 10) {
     minutes = `0${minutes}`;
   }
-
   let dayIndex = date.getDay();
+
   let days = [
     "Sunday",
     "Monday",
@@ -50,6 +52,7 @@ function formatDate(date) {
     "Friday",
     "Saturday",
   ];
+
   let day = days[dayIndex];
   return `${day} ${hours}:${minutes}`;
 }
@@ -103,16 +106,12 @@ function getForecast(coordinates, userCallback) {
   const apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
 
   axios.get(apiUrl).then(getDataFromResponse).then(userCallback);
-
-  // test link
-  // https://api.openweathermap.org/data/2.5/onecall?lat=47.6062&lon=-122.3321&appid=89a9c36cd107591e242e50cb3a76a2e4&units=metric
 }
 
 // All the information about selected city.
 let cityInformation = null;
 
 function onCityInformationUpdated(data) {
-  // cityInformation = data;
 
   displayCity(data);
   displayWeather(data);
@@ -176,10 +175,7 @@ function displayHumidity(data) {
 
 function displayTime(data) {
   const shiftFromUTCInSeconds = data.timezone; // How much time off we are from UTC.
-
-  // TODO: figure out how to convert the time to UTC and apply the shif.
-
-  dateElement.innerText = formatDate(new Date());
+  dateElement.innerText = formatDate(new Date(data.dt + shiftFromUTCInSeconds));
 }
 
 function displayForecast(data) {
@@ -190,7 +186,6 @@ function displayForecast(data) {
   let forecastHTML = `<div class="row">`;
   let days = ["Mon", "Tues", "Wed", "Thurs", "Fri", "Sat"];
   forecast.forEach(function (forecastDay, index) {
-    // let i = 0
     if (index < 6) {
       forecastHTML += `<div class="col-2">
                   <div class="weather-forecast-date">${formatDay(
