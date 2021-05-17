@@ -54,6 +54,13 @@ function formatDate(date) {
   return `${day} ${hours}:${minutes}`;
 }
 
+function formatDay(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let day = date.getDay();
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  return days[day];
+}
+
 // Sends a request to the API, asking for a temperature in city that is
 // currently filled out in `cityInput` element.
 function search(event) {
@@ -70,7 +77,7 @@ function onPositionObtained(position) {
   sendApiRequestByCoords(position.coords, onCityInformationUpdated);
 }
 
-function getDataFromResponse (response) {
+function getDataFromResponse(response) {
   return response.data;
 }
 
@@ -81,29 +88,23 @@ function sendApiRequest(cityName, userCallback) {
   const apiKey = "89a9c36cd107591e242e50cb3a76a2e4";
   const url = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}&units=metric`;
 
-  axios
-    .get(url)
-    .then(getDataFromResponse)
-    .then(userCallback);
+  axios.get(url).then(getDataFromResponse).then(userCallback);
 }
 
 function sendApiRequestByCoords(coords, userCallback) {
   const apiKey = "89a9c36cd107591e242e50cb3a76a2e4";
   const url = `https://api.openweathermap.org/data/2.5/weather?appid=${apiKey}&units=metric&lat=${coords.latitude}&lon=${coords.longitude}`;
 
-  axios
-    .get(url)
-    .then(getDataFromResponse)
-    .then(userCallback);
+  axios.get(url).then(getDataFromResponse).then(userCallback);
 }
 
 function getForecast(coordinates, userCallback) {
   const apiKey = "89a9c36cd107591e242e50cb3a76a2e4";
   const apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
-  
+
   axios.get(apiUrl).then(getDataFromResponse).then(userCallback);
-  
-  // testowy link
+
+  // test link
   // https://api.openweathermap.org/data/2.5/onecall?lat=47.6062&lon=-122.3321&appid=89a9c36cd107591e242e50cb3a76a2e4&units=metric
 }
 
@@ -182,25 +183,38 @@ function displayTime(data) {
 }
 
 function displayForecast(data) {
-
-
   console.log(data);
+  let forecast = data.daily;
+  console.log(forecast);
+
   let forecastHTML = `<div class="row">`;
   let days = ["Mon", "Tues", "Wed", "Thurs", "Fri", "Sat"];
-  days.forEach(function (day) {
-    forecastHTML =
-      forecastHTML +
-      `<div class="col-2">
-                  <div class="weather-forecast-date">${day}</div>
+  forecast.forEach(function (forecastDay, index) {
+    // let i = 0
+    if (index < 6) {
+      forecastHTML =
+        forecastHTML +
+        `<div class="col-2">
+                  <div class="weather-forecast-date">${formatDay(
+                    forecastDay.dt
+                  )}</div>
                   <img
-                    src=""
+                    src="http://openweathermap.org/img/wn/${
+                      forecastDay.weather[0].icon
+                    }@2x.png"
+                    class="forecast-icon"
                     alt=""
                   />
                   <div class="weather-forecast-temperatures">
-                    <span class="temp-max">18°</span>
-                    <span class="temp-min">12°</span>
+                    <span class="temp-max">${Math.round(
+                      forecastDay.temp.max
+                    )}°</span>
+                    <span class="temp-min">${Math.round(
+                      forecastDay.temp.min
+                    )}°</span>
                   </div>            
               </div>`;
+    }
   });
   forecastHTML = forecastHTML + `</div>`;
   forecastElement.innerHTML = forecastHTML;

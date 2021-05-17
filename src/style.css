@@ -1,125 +1,127 @@
 body {
-    font-family: "Montserrat", sans-serif;
-    color: #70757A;
+  font-family: "Montserrat", sans-serif;
+  color: #70757a;
 }
 
 h1 {
-    color: #202124;
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 0;
-
+  color: #202124;
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 0;
 }
 
 ul {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 }
 
 li {
-    list-style: none;
-    font-size: 16px;
+  list-style: none;
+  font-size: 16px;
 }
 
 li:first-letter {
-    text-transform: capitalize;
+  text-transform: capitalize;
 }
 
 a {
-    text-decoration: none;
-    /* color: #0d6efd; */
-    /* cursor: pointer; */
+  text-decoration: none;
+  /* color: #0d6efd; */
+  /* cursor: pointer; */
 }
 
-
 small {
-    font-size: .8em;
+  font-size: 0.8em;
 }
 
 .app-wrapper {
-    max-width: 600px;
-    margin: 20px auto;
-
+  max-width: 600px;
+  margin: 20px auto;
 }
 
 .weather-app {
-    padding: 20px;
-    border: 1px solid #dadde1;
-    border-radius: 7px;
-    background: linear-gradient(to top, #accbee 0%, #e7f0fd 100%);
+  padding: 20px;
+  border: 1px solid #dadde1;
+  border-radius: 7px;
+  background: linear-gradient(to top, #accbee 0%, #e7f0fd 100%);
 }
-
 
 .city-block {
-    margin-bottom: 40px;
+  margin-bottom: 40px;
 }
 
-.city, .current-day, .description {
-    text-align: center;
+.city,
+.current-day,
+.description {
+  text-align: center;
 }
 
 .main-icon {
-    width: 100px;
-    height: 100px;
-    display: block;
-    margin: 0 auto;
+  width: 100px;
+  height: 100px;
+  display: block;
+  margin: 0 auto;
+}
+
+.forecast-icon {
+  width: 56px;
+  height: 56px;
+  padding-right: 2px;
 }
 .temperature {
-    padding-top: 14px;
-    padding-left: 50px;
+  padding-top: 14px;
+  padding-left: 50px;
 }
 .main-temperature {
-    color: #202124;
-    font-size: 48px;
-    line-height: 60px;
+  color: #202124;
+  font-size: 48px;
+  line-height: 60px;
 }
 
 .units {
-    position: relative;
-    top: -22px;
-    margin-left: 10px;
+  position: relative;
+  top: -22px;
+  margin-left: 10px;
 }
 
 .add-info-block {
-    padding-top: 20px;
+  padding-top: 20px;
 }
 
-
 .add-info {
-    font-size: 12px;
-    line-height: 16px;
-    text-align: center;
-    
+  font-size: 12px;
+  line-height: 16px;
+  text-align: center;
 }
 
 .weather-forecast {
-    margin-top: 20px;
-    text-align: center;
+  margin-top: 20px;
+  text-align: center;
 }
 
 .weather-forecast-date {
-    font-size: 16px;
+  font-size: 16px;
 }
 
 .weather-forecast-temperatures {
-    font-size: 13px;
+  font-size: 13px;
 }
 
 .temp-max {
-    color: #202124;
-    font-weight: bold;
+  color: #202124;
+  font-weight: bold;
 }
 
 .active {
-    color: #202124;
-    font-weight: bold;
-    cursor: default;
+  color: #202124;
+  font-weight: bold;
+  cursor: default;
 }
 
 .active:hover {
-    color: #202124;
+  color: #202124;
 }
 
 .localization-button {
-    width: 80px;
+  width: 80px;
 }
